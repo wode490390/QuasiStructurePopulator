@@ -1,4 +1,4 @@
-package cn.wode490390.nukkit.quasistructurepopulator;
+package cn.wode490390.nukkit.quasistructure.util;
 
 import cn.nukkit.Server;
 import cn.nukkit.plugin.Plugin;

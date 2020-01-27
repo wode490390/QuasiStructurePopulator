@@ -1,4 +1,4 @@
-package cn.wode490390.nukkit.quasistructurepopulator;
+package cn.wode490390.nukkit.quasistructure.populator;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
@@ -11,6 +11,8 @@ import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.type.Populator;
 import cn.nukkit.math.NukkitRandom;
 import cn.nukkit.math.Vector3;
+import cn.wode490390.nukkit.quasistructure.QuasiStructurePopulator;
+import cn.wode490390.nukkit.quasistructure.loot.DungeonChest;
 
 public class PopulatorDungeon extends Populator {
 

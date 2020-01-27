@@ -1,4 +1,4 @@
-package cn.wode490390.nukkit.quasistructurepopulator;
+package cn.wode490390.nukkit.quasistructure.populator;
 
 import cn.nukkit.block.BlockSlabStone;
 import cn.nukkit.level.ChunkManager;
@@ -6,6 +6,7 @@ import cn.nukkit.level.biome.EnumBiome;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.type.Populator;
 import cn.nukkit.math.NukkitRandom;
+import cn.wode490390.nukkit.quasistructure.QuasiStructurePopulator;
 
 public class PopulatorDesertWell extends Populator {
 

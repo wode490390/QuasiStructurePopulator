@@ -1,4 +1,4 @@
-package cn.wode490390.nukkit.quasistructurepopulator;
+package cn.wode490390.nukkit.quasistructure.loot;
 
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.item.Item;

@@ -7,7 +7,7 @@
     <groupId>cn.wode490390.nukkit</groupId>
     <artifactId>quasistructurepopulator</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>QuasiStructurePopulator</name>
     <description>Quasi structure populator plugin for Nukkit</description>
     <url>http://wode490390.cn/</url>
