@@ -9,7 +9,6 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.level.generator.populator.type.Populator;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.utils.Logger;
 import cn.wode490390.nukkit.quasistructure.populator.PopulatorDesertWell;
 import cn.wode490390.nukkit.quasistructure.populator.PopulatorDungeon;
 import cn.wode490390.nukkit.quasistructure.scheduler.ChunkPopulateTask;
@@ -22,14 +21,15 @@ import java.util.StringJoiner;
 
 public class QuasiStructurePopulator extends PluginBase implements Listener {
 
-    private static Logger LOGGER;
     private static boolean DEBUG = false;
+
+    private static QuasiStructurePopulator INSTANCE;
 
     private final Map<Level, List<Populator>> populators = Maps.newHashMap();
 
     @Override
     public void onLoad() {
-        LOGGER = this.getLogger();
+        INSTANCE = this;
     }
 
     @Override
@@ -71,13 +71,17 @@ public class QuasiStructurePopulator extends PluginBase implements Listener {
         this.populators.remove(event.getLevel());
     }
 
+    public static QuasiStructurePopulator getInstance() {
+        return INSTANCE;
+    }
+
     public static void debug(Object... objs) {
         if (DEBUG) {
             StringJoiner joiner = new StringJoiner(" ");
             for (Object obj : objs) {
                 joiner.add(String.valueOf(obj));
             }
-            LOGGER.warning(joiner.toString());
+            INSTANCE.getLogger().warning(joiner.toString());
         }
     }
 }
