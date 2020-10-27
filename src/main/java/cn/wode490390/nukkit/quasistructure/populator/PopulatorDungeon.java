@@ -6,7 +6,6 @@ import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.entity.mob.EntitySkeleton;
 import cn.nukkit.entity.mob.EntitySpider;
 import cn.nukkit.entity.mob.EntityZombie;
-import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.type.Populator;
@@ -16,7 +15,7 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.wode490390.nukkit.quasistructure.QuasiStructurePopulator;
 import cn.wode490390.nukkit.quasistructure.loot.DungeonChest;
-import cn.wode490390.nukkit.quasistructure.scheduler.TileSyncTask;
+import cn.wode490390.nukkit.quasistructure.scheduler.BlockActorSpawnTask;
 
 public class PopulatorDungeon extends Populator {
 
@@ -117,13 +116,12 @@ public class PopulatorDungeon extends Populator {
                             if (n == 1) {
                                 level.setBlockAt(tx, y, tz, CHEST, 2);
                                 Vector3 vec = new Vector3(tx, y, tz);
-                                FullChunk ck = level.getChunk(vec.getChunkX(), vec.getChunkZ());
 
                                 CompoundTag chest = BlockEntity.getDefaultCompound(vec, BlockEntity.CHEST);
                                 ListTag<CompoundTag> items = new ListTag<>("Items");
                                 DungeonChest.get().create(items, random);
                                 chest.putList(items);
-                                Server.getInstance().getScheduler().scheduleTask(QuasiStructurePopulator.getInstance(), new TileSyncTask(BlockEntity.CHEST, ck, chest));
+                                Server.getInstance().getScheduler().scheduleTask(QuasiStructurePopulator.getInstance(), new BlockActorSpawnTask(chunk.getProvider().getLevel(), chest));
                                 break;
                             }
                         }
@@ -131,9 +129,11 @@ public class PopulatorDungeon extends Populator {
                 }
 
                 level.setBlockAt(x, y, z, MONSTER_SPAWNER);
-                Server.getInstance().getScheduler().scheduleTask(QuasiStructurePopulator.getInstance(), new TileSyncTask(BlockEntity.MOB_SPAWNER, chunk, BlockEntity.getDefaultCompound(new Vector3(x, y, z), BlockEntity.MOB_SPAWNER).putInt("EntityId", MOBS[random.nextBoundedInt(MOBS.length)])));
+                Server.getInstance().getScheduler().scheduleTask(QuasiStructurePopulator.getInstance(), new BlockActorSpawnTask(chunk.getProvider().getLevel(),
+                        BlockEntity.getDefaultCompound(new Vector3(x, y, z), BlockEntity.MOB_SPAWNER)
+                                .putInt("EntityId", MOBS[random.nextBoundedInt(MOBS.length)])));
 
-                QuasiStructurePopulator.debug(getClass().getSimpleName(), x, y, z);
+                QuasiStructurePopulator.debug(this.getClass().getSimpleName(), x, y, z);
             }
         }
     }

@@ -1,6 +1,6 @@
 main: cn.wode490390.nukkit.quasistructure.QuasiStructurePopulator
 name: "QuasiStructurePopulator"
-description: "Quasi structure populator plugin for Nukkit"
+description: "Quasi-structure populator plugin for Nukkit"
 author: "wode490390"
 website: "http://wode490390.cn/"
 version: "${pom.version}"

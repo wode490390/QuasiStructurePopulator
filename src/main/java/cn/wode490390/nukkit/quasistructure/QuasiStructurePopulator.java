@@ -11,17 +11,18 @@ import cn.nukkit.level.generator.populator.type.Populator;
 import cn.nukkit.plugin.PluginBase;
 import cn.wode490390.nukkit.quasistructure.populator.PopulatorDesertWell;
 import cn.wode490390.nukkit.quasistructure.populator.PopulatorDungeon;
-import cn.wode490390.nukkit.quasistructure.scheduler.ChunkPopulateTask;
+import cn.wode490390.nukkit.quasistructure.scheduler.ChunkPopulationTask;
 import cn.wode490390.nukkit.quasistructure.util.MetricsLite;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
 public class QuasiStructurePopulator extends PluginBase implements Listener {
 
-    private static boolean DEBUG = false;
+    private static final boolean DEBUG = false;
 
     private static QuasiStructurePopulator INSTANCE;
 
@@ -36,7 +37,7 @@ public class QuasiStructurePopulator extends PluginBase implements Listener {
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
         try {
-            new MetricsLite(this);
+            new MetricsLite(this, 6037);
         } catch (Throwable ignore) {
 
         }
@@ -62,7 +63,7 @@ public class QuasiStructurePopulator extends PluginBase implements Listener {
         Level level = event.getLevel();
         List<Populator> populators = this.populators.get(level);
         if (populators != null) {
-            this.getServer().getScheduler().scheduleAsyncTask(this, new ChunkPopulateTask(level, event.getChunk(), populators));
+            this.getServer().getScheduler().scheduleAsyncTask(this, new ChunkPopulationTask(level, event.getChunk(), populators));
         }
     }
 
@@ -77,11 +78,15 @@ public class QuasiStructurePopulator extends PluginBase implements Listener {
 
     public static void debug(Object... objs) {
         if (DEBUG) {
-            StringJoiner joiner = new StringJoiner(" ");
-            for (Object obj : objs) {
-                joiner.add(String.valueOf(obj));
+            try {
+                StringJoiner joiner = new StringJoiner(" ");
+                for (Object obj : objs) {
+                    joiner.add(String.valueOf(obj));
+                }
+                INSTANCE.getLogger().warning(joiner.toString());
+            } catch (Throwable ignore) {
+
             }
-            INSTANCE.getLogger().warning(joiner.toString());
         }
     }
 }

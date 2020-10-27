@@ -16,16 +16,16 @@ public class PopulatorDesertWell extends Populator {
         if ((biome == EnumBiome.DESERT.id || biome == EnumBiome.DESERT_HILLS.id || biome == EnumBiome.DESERT_M.id) && random.nextBoundedInt(500) == 0) {
             int x = (chunkX << 4) + random.nextBoundedInt(16);
             int z = (chunkZ << 4) + random.nextBoundedInt(16);
-            int y = getHighestWorkableBlock(level, x, z, chunk);
+            int y = this.getHighestWorkableBlock(level, x, z, chunk);
 
             if (y > 128) {
                 return;
             }
-            
+
             if (level.getBlockIdAt(x, y, z) != SAND) {
                 return;
             }
-            
+
             for (int dx = -2; dx <= 2; ++dx) {
                 for (int dz = -2; dz <= 2; ++dz) {
                     if (level.getBlockIdAt(x + dx, y - 1, z + dz) == AIR && level.getBlockIdAt(x + dx, y - 2, z + dz) == AIR) {
@@ -73,7 +73,7 @@ public class PopulatorDesertWell extends Populator {
                 level.setBlockAt(x + 1, y + dy, z + 1, SANDSTONE);
             }
 
-            QuasiStructurePopulator.debug(getClass().getSimpleName(), x, y, z);
+            QuasiStructurePopulator.debug(this.getClass().getSimpleName(), x, y, z);
         }
     }
 }

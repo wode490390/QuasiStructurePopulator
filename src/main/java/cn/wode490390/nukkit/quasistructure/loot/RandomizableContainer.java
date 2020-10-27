@@ -7,6 +7,7 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
 import java.util.List;
 import java.util.Map;
 
@@ -49,9 +50,9 @@ public class RandomizableContainer {
 
     protected static class RollEntry {
 
-        private int max;
-        private int min;
-        private int totalWeight;
+        private final int max;
+        private final int min;
+        private final int totalWeight;
 
         public RollEntry(int max, int totalWeight) {
             this(max, -1, totalWeight);
@@ -78,11 +79,11 @@ public class RandomizableContainer {
 
     protected static class ItemEntry {
 
-        private int id;
-        private int meta;
-        private int maxCount;
-        private int minCount;
-        private int weight;
+        private final int id;
+        private final int meta;
+        private final int maxCount;
+        private final int minCount;
+        private final int weight;
 
         public ItemEntry(int id, int weight) {
             this(id, 0, weight);
@@ -93,7 +94,7 @@ public class RandomizableContainer {
         }
 
         public ItemEntry(int id, int meta, int maxCount, int weight) {
-            this(id, meta, maxCount, 0, weight);
+            this(id, meta, maxCount, 1, weight);
         }
 
         public ItemEntry(int id, int meta, int maxCount, int minCount, int weight) {
@@ -127,7 +128,7 @@ public class RandomizableContainer {
 
     protected static class PoolBuilder {
 
-        private List<ItemEntry> pool = Lists.newArrayList();
+        private final List<ItemEntry> pool = Lists.newArrayList();
         private int totalWeight = 0;
 
         public PoolBuilder register(ItemEntry entry) {
