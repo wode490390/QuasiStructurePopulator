@@ -17,6 +17,10 @@ public class PopulatorDesertWell extends Populator {
             int z = (chunkZ << 4) + random.nextBoundedInt(16);
             int y = getHighestWorkableBlock(level, x, z, chunk);
 
+            if (y > 128) {
+                return;
+            }
+            
             if (level.getBlockIdAt(x, y, z) != SAND) {
                 return;
             }
