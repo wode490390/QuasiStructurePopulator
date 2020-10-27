@@ -12,7 +12,7 @@ public class PopulatorDesertWell extends Populator {
 
     @Override
     public void populate(ChunkManager level, int chunkX, int chunkZ, NukkitRandom random, FullChunk chunk) {
-        if (chunk.getBiomeId(7, 7) == EnumBiome.DESERT.id && random.nextBoundedInt(1000) == 0) {
+        if ((chunk.getBiomeId(7, 7) == EnumBiome.DESERT.id || chunk.getBiomeId(7, 7) == EnumBiome.DESERT_HILLS.id || chunk.getBiomeId(7, 7) == EnumBiome.DESERT_M.id) && random.nextBoundedInt(1000) == 0) {
             int x = (chunkX << 4) + random.nextBoundedInt(16);
             int z = (chunkZ << 4) + random.nextBoundedInt(16);
             int y = getHighestWorkableBlock(level, x, z, chunk);
